@@ -312,3 +312,58 @@
     }
   });
 </script>
+<script>
+  const reviewForm = document.getElementById("review-form");
+  const reviewList = document.getElementById("review-list");
+
+  // Load reviews from localStorage on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const storedReviews = JSON.parse(localStorage.getItem("customerReviews")) || [];
+    displayReviews(storedReviews);
+  });
+
+  reviewForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const product = document.getElementById("product").value.trim();
+    const experience = document.getElementById("experience").value.trim();
+
+    if (name && product && experience) {
+      const newReview = {
+        name: name,
+        product: product,
+        experience: experience,
+        time: new Date().toISOString()
+      };
+
+      let reviews = JSON.parse(localStorage.getItem("customerReviews")) || [];
+      reviews.unshift(newReview); // Add new review to the beginning
+      reviews = reviews.slice(0, 10); // Keep only latest 10 reviews
+
+      localStorage.setItem("customerReviews", JSON.stringify(reviews));
+
+      displayReviews(reviews);
+      reviewForm.reset();
+    } else {
+      alert("Please fill in all fields before submitting.");
+    }
+  });
+
+  function displayReviews(reviews) {
+    reviewList.innerHTML = "";
+    reviews.forEach(review => {
+      const reviewItem = document.createElement("div");
+      reviewItem.style.background = "#ffffff";
+      reviewItem.style.padding = "20px";
+      reviewItem.style.borderRadius = "12px";
+      reviewItem.style.boxShadow = "0 0 10px rgba(0,0,0,0.05)";
+      reviewItem.innerHTML = `
+        <p><strong>Name:</strong> ${review.name}</p>
+        <p><strong>Product:</strong> ${review.product}</p>
+        <p><strong>Experience:</strong><br>${review.experience}</p>
+      `;
+      reviewList.appendChild(reviewItem);
+    });
+  }
+</script>
