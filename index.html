@@ -243,3 +243,61 @@
     </div>
   </div>
 </section>
+<!-- Customer Review Section -->
+<section id="customer-reviews" style="padding: 40px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; font-size: 32px; margin-bottom: 30px;">💬 Customer Reviews</h2>
+
+  <div style="max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <form id="review-form">
+      <div style="margin-bottom: 20px;">
+        <label for="name" style="font-weight: bold;">Your Name:</label><br>
+        <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label for="product" style="font-weight: bold;">Product Name:</label><br>
+        <input type="text" id="product" name="product" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label for="experience" style="font-weight: bold;">Your Experience:</label><br>
+        <textarea id="experience" name="experience" rows="5" required style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+      </div>
+
+      <div style="text-align: center;">
+        <button type="button" onclick="previewReview()" style="background-color: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer;">
+          🔍 Preview Review
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="preview-section" style="display:none; margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+    <h3 style="text-align: center; margin-bottom: 20px;">📝 Your Review Preview</h3>
+    <div style="background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: left;">
+      <p><strong>Name:</strong> <span id="preview-name"></span></p>
+      <p><strong>Product:</strong> <span id="preview-product"></span></p>
+      <p><strong>Experience:</strong></p>
+      <p id="preview-experience"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Script for previewing the review -->
+<script>
+function previewReview() {
+  var name = document.getElementById("name").value.trim();
+  var product = document.getElementById("product").value.trim();
+  var experience = document.getElementById("experience").value.trim();
+
+  if(name && product && experience) {
+    document.getElementById("preview-name").textContent = name;
+    document.getElementById("preview-product").textContent = product;
+    document.getElementById("preview-experience").textContent = experience;
+    document.getElementById("preview-section").style.display = "block";
+  } else {
+    alert("Please fill all fields before previewing!");
+  }
+}
+</script>
+
